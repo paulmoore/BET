@@ -1,0 +1,19 @@
+{
+  "name": "BET",
+  "version": "1.0.0",
+  "author": "Paul Moore <paul.andrewharrison.moore@gmail.com>",
+  "description": "A Binary Expression Tree implementation which can evaluate infix mathematical expressions",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/paulmoore/BET"
+  },
+  "engines":
+  {
+    "node": "0.8.x"
+  },
+  "scripts":
+  {
+    "prepublish": "cake build"
+  }
+}
