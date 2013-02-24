@@ -3,7 +3,6 @@
 This project makes use of Binary Expression Trees and the [Shunting-Yard algorithm](http://en.wikipedia.org/wiki/Shunting-yard_algorithm) to evaluate infix equations and produce a numerical result.
 
 http://paulmoore.mit-license.org
-
 ===
 
 ## Installing
@@ -47,11 +46,16 @@ BET.operators['&&'] =
 ```
 
 Operators require the following attributes:
+
 1. __assoc__: Associativity _['left' or 'right']_ Associativity indicates the order in which operators of the same precedence are executed.  For instance, `&&` has an associativity of 'left' and thus `a && b && c` is evaluated as `(a && b) && c`.
+
 2. __prec__: Precedence _[integer]_ Operators with a higher precedence (higher value) are executed first.  For instance, `1 + 2 * 3` is evaluated as `1 + (2 * 3)`.
+
 3. __argc__: Argument count _[integer]_ The number of numerical operands an operator needs to execute.  In practice this is usually only 1 (for unary) or 2 (for binary) operators.  For instance, `+` requires 2 operands e.g. `1 + 2`, whereas `1 +` will produce an error.
-3. __fix__: How the operator is 'fixed' _['in', 'pre', or 'post']_ Most binary operators are infixed, meaning the operator is between the operands e.g. `1 / 2`.  Unary operators are usually either pre or post fixed, e.g. `5 !` (postfixed) or `not 1` (prefixed).  However, you can also have infixed unary operators (just be careful with associativity!) such as pre and post increment/decrement, e.g. `++1` and `1++` are both valid.
-4. __exec__: Evaluator _[function]_ This is the function that is called to evaluate the operator.  It is given a single argument as an array, with length argc.  All values are numerical.
+
+4. __fix__: How the operator is 'fixed' _['in', 'pre', or 'post']_ Most binary operators are infixed, meaning the operator is between the operands e.g. `1 / 2`.  Unary operators are usually either pre or post fixed, e.g. `5 !` (postfixed) or `not 1` (prefixed).  However, you can also have infixed unary operators (just be careful with associativity!) such as pre and post increment/decrement, e.g. `++1` and `1++` are both valid.
+
+5. __exec__: Evaluator _[function]_ This is the function that is called to evaluate the operator.  It is given a single argument as an array, with length argc.  All values are numerical.
 
 ### Custom Functions
 
@@ -66,7 +70,9 @@ BET.functions['avg'] =
 ```
 
 Declaration of a function is much like an operator.  However it requires only 2 attributes:
+
 1. __argc__: Argument count _[integer]_ The number or arguments the function takes.
+
 2. __exec__: Evaluator _[function]_ This is the function that is called to evaluate the function.  It is passed an array of in order numerical arguments.
 
 ---

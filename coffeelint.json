@@ -13,7 +13,7 @@
     "level": "error"
   },
   "indentation": {
-    "value": 2,
+    "value": 4,
     "level": "warn"
   },
   "no_implicit_braces": {
@@ -29,8 +29,8 @@
     "level" : "error"
   },
   "cyclomatic_complexity": {
-    "value" : 12,
-    "level" : "warn"
+    "value" : 10,
+    "level" : "ignore"
   },
   "line_endings": {
     "value": "unix",
