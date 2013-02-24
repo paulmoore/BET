@@ -1,6 +1,17 @@
+## BET unit tests.
+#
+# http://paulmoore.mit-license.org
+
+# TODO
+# * association tests
+# * precedence tests
+# * prefix, postfix, and infix tests
+# * argument count tests
+# * custom operator tests
+# * custom function tests
 
 {evaluate} = require './BET'
-{pow, sqrt, floor, ceil, abs} = Math
+{pow, sqrt, floor, ceil, abs, min, max} = Math
 
 str2eqn = (str) ->
 	eqn = str.split ' '
@@ -97,7 +108,7 @@ module.exports =
 		eqn = str2eqn '2 ^ neg 3'
 		evaluate eqn, (r, e) ->
 			test.ifError e
-			evalcheck test, eqn, r, (1/8)
+			evalcheck test, eqn, r, (1 / 8)
 			test.done()
 
 	'test basic exponent operator': (test) ->
@@ -139,3 +150,76 @@ module.exports =
 			test.ifError e
 			evalcheck test, eqn, r, (2 * -1)
 			test.done()
+
+	'test basic square root function': (test) ->
+		test.expect 4
+		eqn = str2eqn 'sqrt ( 2 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, (sqrt 2)
+		eqn = str2eqn 'sqrt ( ( 1 + 2 ) * 3 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, (sqrt ((1 + 2) * 3))
+		test.done()
+
+	'test basic integer square root function': (test) ->
+		test.expect 4
+		eqn = str2eqn 'isqrt ( 2 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, (floor sqrt 2)
+		eqn = str2eqn 'isqrt ( ( 1 + 2 ) * 3 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, (floor sqrt ((1 + 2) * 3))
+		test.done()
+
+	'test basic floor function': (test) ->
+		test.expect 4
+		eqn = str2eqn 'floor ( 2 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, floor 2
+		eqn = str2eqn 'floor ( 1.5 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, floor 1.5
+		test.done()
+
+	'test basic ceiling function': (test) ->
+		test.expect 4
+		eqn = str2eqn 'ceil ( 2 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, ceil 2
+		eqn = str2eqn 'ceil ( 1.5 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, ceil 1.5
+		test.done()
+
+	'test basic min function': (test) ->
+		test.expect 4
+		eqn = str2eqn 'min ( 1 , 2 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, min(1, 2)
+		eqn = str2eqn 'min ( 2 , 1 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, min(2, 1)
+		test.done()
+
+	'test basic max function': (test) ->
+		test.expect 4
+		eqn = str2eqn 'max ( 1 , 2 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, max(1, 2)
+		eqn = str2eqn 'max ( 2 , 1 )'
+		evaluate eqn, (r, e) ->
+			test.ifError e
+			evalcheck test, eqn, r, max(2, 1)
+		test.done()
+ 

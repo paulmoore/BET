@@ -1,10 +1,16 @@
-# A very simple Algebraic Binary Expression Tree equation evaluator.
+## A very simple Algebraic Binary Expression Tree equation evaluator.
 # Based on the Shunting-Yard algorithm and ASTs.
 # This library will work if you need basic integral arithmetic
 # (although it can be modified for floating point)
 # for operators such as add/sub mul/div mod and exponents.
 #
 # http://paulmoore.mit-license.org
+
+# TODO
+# * better handling of unary operators that can be pre or post fixed
+# * variable argument functions and operators
+# * preprocessing hooks for before/after/during AST generation
+# * more built in functions and operatos, perhaps
 
 {pow, sqrt, floor, ceil, min, max} = Math
 
