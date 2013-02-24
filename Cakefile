@@ -33,14 +33,17 @@ lint = (next) ->
     
 task 'lint', 'Run coffeelint over the src/ directory and print out the results', -> lint()
 
-task 'build', 'Build project from src/ to lib/ and copy necessary files to output directory', ->
+option '-t', '--test', 'Build the unit tests as well'
+
+task 'build', 'Build project from src/ to lib/ and copy necessary files to output directory', (options) ->
   log '----------------------------'
   log '--     CAKEFILE BUILD     --'
   log '----------------------------'
   clean -> lint ->
     # Build the project with the CoffeeScript compiler.
     console.log 'Attempting to compile src/ to lib/'
-    exec 'coffee -c -o ./lib/ ./src/', (err, stdout, stderr) ->
+    source = if options.test then './src/ ./test/' else './src/'
+    exec "coffee -c -o ./lib/ #{source}", (err, stdout, stderr) ->
       throw err if err
       msg = stdout + stderr
       log msg if msg isnt ""

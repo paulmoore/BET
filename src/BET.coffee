@@ -206,41 +206,46 @@ shuntingYard = (input) ->
 # @param input [array] The equation in infix order broken into individual tokens.
 # @return [mixed] Returns the result of the equation as a number on success, or an instance of Error on fail.
 evaluate = (input, next) ->
-	# generate the AST
-	output = shuntingYard(input)
 	result = NaN
 	error = null
-	if output instanceof Error
-		error = output
+	if not Array.isArray input
+		error = new Error "Input must be array but got #{input?.toString() or 'null'}"
+	else if input.length is 1 and typeof input[0] is 'number'
+		result = input[0]
 	else
-		queue = output
-		stack = []
-		while queue.length + stack.length > 0
-			if queue.length > 0
-				# first, we always push one more op/num onto the stack if we have one
-				token = queue.shift()
-				stack.push token
-			if stack.length > 0
-				# check the stack for a top level operator
-				top = stack[stack.length - 1]
-				fnop = operators[top] or functions[top]
-				# do we have enough arguments to execute it?
-				if fnop? and stack.length > fnop.argc
-					stack.pop()
-					args = []
-					# pop the operator and it's arguments
-					i = fnop.argc
-					while i > 0
-						args.unshift stack.pop()
-						i--
-					result = fnop.exec args
-					# push the result of the operation back onto the stack
-					if queue.length + stack.length > 0
-						stack.push result
-				else if queue.length is 0
-					error = new Error "Cannot make any progress on equation, did you misplace a unary operator? stack: #{stack.toString()}"
-					result = NaN
-					break
+		# generate the AST
+		output = shuntingYard(input)
+		if output instanceof Error
+			error = output
+		else
+			queue = output
+			stack = []
+			while queue.length + stack.length > 0
+				if queue.length > 0
+					# first, we always push one more op/num onto the stack if we have one
+					token = queue.shift()
+					stack.push token
+				if stack.length > 0
+					# check the stack for a top level operator
+					top = stack[stack.length - 1]
+					fnop = operators[top] or functions[top]
+					# do we have enough arguments to execute it?
+					if fnop? and stack.length > fnop.argc
+						stack.pop()
+						args = []
+						# pop the operator and it's arguments
+						i = fnop.argc
+						while i > 0
+							args.unshift stack.pop()
+							i--
+						result = fnop.exec args
+						# push the result of the operation back onto the stack
+						if queue.length + stack.length > 0
+							stack.push result
+					else if queue.length is 0
+						error = new Error "Cannot make any progress on equation, did you misplace a unary operator? stack: #{stack.toString()}"
+						result = NaN
+						break
 	if isNaN(result) and not error?
 		error = new Error 'Calculation error, check equation syntax'
 	next? result, error

@@ -1,54 +1,42 @@
 {
-  "no_tabs":
-  {
+  "no_tabs": {
     "level": "warn"
   },
-  "no_trailing_whitespace":
-  {
+  "no_trailing_whitespace": {
     "level": "warn"
   },
-  "max_line_length":
-  {
+  "max_line_length": {
     "value": 80,
     "level": "ignore"
   },
-  "camel_case_classes":
-  {
+  "camel_case_classes": {
     "level": "error"
   },
-  "indentation":
-  {
+  "indentation": {
     "value": 2,
     "level": "warn"
   },
-  "no_implicit_braces":
-  {
+  "no_implicit_braces": {
     "level": "ignore"
   },
-  "no_trailing_semicolons":
-  {
+  "no_trailing_semicolons": {
     "level": "warn"
   },
-  "no_plusplus":
-  {
+  "no_plusplus": {
     "level": "ignore"
   },
-  "no_throwing_strings":
-  {
+  "no_throwing_strings": {
     "level" : "error"
   },
-  "cyclomatic_complexity":
-  {
+  "cyclomatic_complexity": {
     "value" : 12,
     "level" : "warn"
   },
-  "line_endings":
-  {
+  "line_endings": {
     "value": "unix",
     "level": "warn"
   },
-  "no_implicit_parens":
-  {
+  "no_implicit_parens": {
     "level": "ignore"
   }
 }

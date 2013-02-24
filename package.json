@@ -1,17 +1,22 @@
 {
   "name": "BET",
-  "version": "1.1.0",
+  "version": "0.1.2",
   "author": "Paul Moore <paul.andrewharrison.moore@gmail.com> (http://paul-moore.ca)",
   "description": "A Binary Expression Tree implementation which can evaluate infix mathematical expressions",
   "keywords": ["binary", "expression", "tree", "shunting", "yard"],
   "main": "lib/BET.js",
-  "repository":
-  {
+  "repository": {
     "type": "git",
     "url": "https://github.com/paulmoore/BET"
   },
-  "scripts":
-  {
-    "prepublish": "cake build"
+  "devDependencies": {
+    "nodeunit": "0.7.x",
+    "coffee-script": "1.4.x",
+    "coffeelint": "1.5.x"
+  },
+  "scripts": {
+    "prepublish": "cake build",
+    "pretest": "cake -t build",
+    "test": "nodeunit lib/tests.js"
   }
 }
