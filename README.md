@@ -11,7 +11,7 @@ http://paulmoore.mit-license.org
 Typical NPM installation:
 
 ```CoffeeScript
-npm install BET
+npm install bet
 ```
 
 ---
