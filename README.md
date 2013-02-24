@@ -1,10 +1,11 @@
-# A Mathematical Evaluator for CoffeeScript and JavaScript
+A Mathematical Evaluator for CoffeeScript and JavaScript
+===
 
 This project makes use of Binary Expression Trees and the [Shunting-Yard algorithm](http://en.wikipedia.org/wiki/Shunting-yard_algorithm) to evaluate infix equations and produce a numerical result.
 
 http://paulmoore.mit-license.org
-===
 
+---
 ## Installing
 
 Typical NPM installation:
