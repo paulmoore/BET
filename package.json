@@ -1,6 +1,6 @@
 {
   "name": "BET",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Paul Moore <paul.andrewharrison.moore@gmail.com> (http://paul-moore.ca)",
   "description": "A Binary Expression Tree implementation which can evaluate infix mathematical expressions",
   "keywords": ["binary", "expression", "tree", "shunting", "yard"],

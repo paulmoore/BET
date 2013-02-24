@@ -254,7 +254,7 @@ evaluate = (input, next) ->
 						break
 	if isNaN(result) and not error?
 		error = new Error 'Calculation error, check equation syntax'
-	next? result, error
+	next? error, result
 
 # Module Exports
 BET = {}
