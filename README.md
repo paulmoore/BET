@@ -26,7 +26,7 @@ The library expects that you have some way of separating your tokens, whether it
 BET = require 'BET'
 # Evaluating an equation
 BET.evaluate ['1','+','isqrt','(','2','^2',')'], (error, result) ->
-	console.log "#{result or error?.toString()}"
+    console.log "#{result or error?.toString()}"
 ```
 
 You will want to check the source to see the full list of built-in operators and functions that are currently supported.
@@ -39,11 +39,11 @@ You can define or redefine operators as you wish.
 BET = require 'BET'
 # C style logical AND
 BET.operators['&&'] =
-	assoc: 'left'
-	prec: 0
-	argc: 2
-	fix: 'in'
-	exec: (args) -> 1 if args[0] isnt 0 and args[1] isnt 0 else 0
+    assoc: 'left'
+    prec: 0
+    argc: 2
+    fix: 'in'
+    exec: (args) -> 1 if args[0] isnt 0 and args[1] isnt 0 else 0
 ```
 
 Operators require the following attributes:
@@ -66,8 +66,8 @@ Functions are similar to operators.  You can also define new or redefine functio
 BET = require 'BET'
 # Averages 3 numbers
 BET.functions['avg'] =
-	argc: 3
-	exec: (args) -> (args[0] + args[1] + args[2]) / 3
+    argc: 3
+    exec: (args) -> (args[0] + args[1] + args[2]) / 3
 ```
 
 Declaration of a function is much like an operator.  However it requires only 2 attributes:

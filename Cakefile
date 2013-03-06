@@ -2,6 +2,7 @@
 #
 # Build file for BET
 #
+# https://github.com/paulmoore/BET
 # http://paulmoore.mit-license.org
 
 {exec} = require 'child_process'
@@ -13,7 +14,7 @@ clean = (next) ->
   exec 'rm -rfv ./lib/', (err, stdout, stderr) ->
     throw err if err
     msg = stdout + stderr
-    log msg if msg isnt ""
+    log msg if msg isnt ''
     log 'Done delete'
     log 'Done clean'
     next?()
@@ -25,7 +26,7 @@ lint = (next) ->
   log 'Attempting to lint src/'
   exec 'coffeelint -r -f ./coffeelint.json ./src/', (err, stdout, stderr) ->
     msg = stdout + stderr
-    log msg if msg isnt ""
+    log msg if msg isnt ''
     # This will be thrown if an 'error' level lint error occurs.
     throw err if err
     log 'Done lint'
@@ -43,10 +44,11 @@ task 'build', 'Build project from src/ to lib/ and copy necessary files to outpu
     # Build the project with the CoffeeScript compiler.
     console.log 'Attempting to compile src/ to lib/'
     source = if options.test then './src/ ./test/' else './src/'
-    exec "coffee -c -o ./lib/ #{source}", (err, stdout, stderr) ->
+    map = if options.test then '-m' else ''
+    exec "coffee -c #{map} -o ./lib/ #{source}", (err, stdout, stderr) ->
       throw err if err
       msg = stdout + stderr
-      log msg if msg isnt ""
+      log msg if msg isnt ''
       log 'Done compile'
       log 'Done build'
       log '----------------------------'

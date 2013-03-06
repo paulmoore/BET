@@ -4,6 +4,7 @@
 # (although it can be modified for floating point)
 # for operators such as add/sub mul/div mod and exponents.
 #
+# https://github.com/paulmoore/BET
 # http://paulmoore.mit-license.org
 
 # TODO
@@ -264,4 +265,5 @@ BET.functions = functions
 BET.shuntingYard = shuntingYard
 BET.evaluate = evaluate
 
-module.exports = BET
+module.exports = BET if module?
+window.BET = BET if window?
