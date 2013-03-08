@@ -21,12 +21,29 @@ The library expects that you have some way of separating your tokens, whether it
 
 ### Simple Example
 
+In CoffeeScript
 ```CoffeeScript
 # Require the module
-BET = require 'BET'
+{evaluate} = require 'bet'
+
 # Evaluating an equation
-BET.evaluate ['1','+','isqrt','(','2','^2',')'], (error, result) ->
-    console.log "#{result or error?.toString()}"
+evaluate ['1','+','isqrt','(','2','^2',')'], (error, result) ->
+    console.log error ? result
+```
+
+In JavaScript
+```JavaScript
+// Require the module
+var BET = require("bet");
+
+// Evaluating an equation
+BET.evaluate(['1','+','isqrt','(','2','^2',')'], function(error, result) {
+	if (error !== null) {
+		console.log(error);
+	} else {
+		console.log(result);
+	}
+});
 ```
 
 You will want to check the source to see the full list of built-in operators and functions that are currently supported.
@@ -36,14 +53,18 @@ You will want to check the source to see the full list of built-in operators and
 You can define or redefine operators as you wish.
 
 ```CoffeeScript
-BET = require 'BET'
+{evaluate, operators} = require 'bet'
+
 # C style logical AND
-BET.operators['&&'] =
+operators['&&'] =
     assoc: 'left'
     prec: 0
     argc: 2
     fix: 'in'
     exec: (args) -> 1 if args[0] isnt 0 and args[1] isnt 0 else 0
+
+evaluate [1,'&&',1,'&&',0], (error, result) ->
+	console.log error ? result
 ```
 
 Operators require the following attributes:
@@ -63,11 +84,15 @@ Operators require the following attributes:
 Functions are similar to operators.  You can also define new or redefine functions.  Functions in this library are invoked C style `fn(arg1,arg2,arg3)`.  Currently, variable argument functions are not supported.  Function arguments can be expressions in themselves.  Functions cannot have the same name as an operator.
 
 ```CoffeeScript
-BET = require 'BET'
+{evaluate, functions} = require 'bet'
+
 # Averages 3 numbers
-BET.functions['avg'] =
+functions['avg'] =
     argc: 3
     exec: (args) -> (args[0] + args[1] + args[2]) / 3
+
+evaluate ['avg','(',1,2,3,')'], (error, result) ->
+	console.log error ? result
 ```
 
 Declaration of a function is much like an operator.  However it requires only 2 attributes:
