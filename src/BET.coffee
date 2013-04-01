@@ -262,8 +262,14 @@ BET = {}
 
 BET.operators = operators
 BET.functions = functions
-BET.shuntingYard = shuntingYard
-BET.evaluate = evaluate
+if process?.nextTick?
+    BET.evaluate = (input, next) -> process.nextTick -> evaluate input, next
+BET.evaluateSync = (input) ->
+    ret = NaN
+    evaluate input, (err, res) ->
+        throw err if err?
+        ret = res
+    ret
 
 module.exports = BET if module?
 window.BET = BET if window?

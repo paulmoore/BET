@@ -8,6 +8,16 @@
 {exec} = require 'child_process'
 {log} = console
 
+option '-t', '--test', 'Build the unit tests as well'
+
+task 'clean', 'Clean any previous build in lib/', -> clean()
+
+task 'lint', 'Run coffeelint over the src/ directory and print out the results', -> lint()
+
+task 'build', 'Build project from src/ to lib/ and copy necessary files to output directory', (options) -> build options
+
+task 'sbuild', 'Runs build, needed for Sublime Text 2 builds', (options) -> build options
+
 clean = (next) ->
   # Delete old build.
   log 'Attempting to delete build in lib/'
@@ -18,8 +28,6 @@ clean = (next) ->
     log 'Done delete'
     log 'Done clean'
     next?()
-
-task 'clean', 'Clean any previous build in lib/', -> clean()
     
 lint = (next) ->
   # Run coffeelint over the source code.
@@ -31,12 +39,8 @@ lint = (next) ->
     throw err if err
     log 'Done lint'
     next?()
-    
-task 'lint', 'Run coffeelint over the src/ directory and print out the results', -> lint()
 
-option '-t', '--test', 'Build the unit tests as well'
-
-task 'build', 'Build project from src/ to lib/ and copy necessary files to output directory', (options) ->
+build = (options) ->
   log '----------------------------'
   log '--     CAKEFILE BUILD     --'
   log '----------------------------'

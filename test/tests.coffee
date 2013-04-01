@@ -13,7 +13,7 @@
 
 require('source-map-support').install()
 
-{evaluate} = require './BET'
+{evaluate, evaluateSync} = require './BET'
 {pow, sqrt, floor, ceil, abs, min, max} = Math
 
 str2eqn = (str) ->
@@ -42,6 +42,23 @@ module.exports =
             test.ok isNaN(r), "Expression is not NaN: ${r}"
             test.ok e?, 'Expression did not produce an error'
             test.done()
+
+    'test evaluate sync does not error and returns proper value': (test) ->
+        test.expect 1
+        eqn = str2eqn '1 + 2'
+        r = evaluateSync eqn
+        evalcheck test, eqn, r, 1 + 2
+        test.done()
+
+    'test evaluate sync throws an error on invalid equation': (test) ->
+        test.expect 1
+        eqn = str2eqn '+ * 1 x'
+        try
+            evaluateSync eqn
+            test.ok no, 'Expression did not produce an error'
+        catch e
+            test.ok e?
+        test.done()
 
     'test evaluating single number results in that number': (test) ->
         test.expect 2
@@ -164,7 +181,7 @@ module.exports =
         evaluate eqn, (e, r) ->
             test.ifError e
             evalcheck test, eqn, r, (sqrt ((1 + 2) * 3))
-        test.done()
+            test.done()
 
     'test basic integer square root function': (test) ->
         test.expect 4
@@ -176,7 +193,7 @@ module.exports =
         evaluate eqn, (e, r) ->
             test.ifError e
             evalcheck test, eqn, r, (floor sqrt ((1 + 2) * 3))
-        test.done()
+            test.done()
 
     'test basic floor function': (test) ->
         test.expect 4
@@ -188,7 +205,7 @@ module.exports =
         evaluate eqn, (e, r) ->
             test.ifError e
             evalcheck test, eqn, r, floor 1.5
-        test.done()
+            test.done()
 
     'test basic ceiling function': (test) ->
         test.expect 4
@@ -200,7 +217,7 @@ module.exports =
         evaluate eqn, (e, r) ->
             test.ifError e
             evalcheck test, eqn, r, ceil 1.5
-        test.done()
+            test.done()
 
     'test basic min function': (test) ->
         test.expect 4
@@ -212,7 +229,7 @@ module.exports =
         evaluate eqn, (e, r) ->
             test.ifError e
             evalcheck test, eqn, r, min(2, 1)
-        test.done()
+            test.done()
 
     'test basic max function': (test) ->
         test.expect 4
@@ -224,5 +241,5 @@ module.exports =
         evaluate eqn, (e, r) ->
             test.ifError e
             evalcheck test, eqn, r, max(2, 1)
-        test.done()
+            test.done()
  

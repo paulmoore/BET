@@ -1,7 +1,7 @@
 {
   "name": "bet",
-  "version": "0.1.4",
-  "author": "Paul Moore <paul.andrewharrison.moore@gmail.com> (http://paul-moore.ca)",
+  "version": "0.2.0",
+  "author": "Paul Moore <paul@paul-moore.ca> (http://paul-moore.ca)",
   "description": "A Binary Expression Tree implementation which can evaluate infix mathematical expressions",
   "keywords": ["binary", "expression", "tree", "shunting", "yard"],
   "main": "lib/BET.js",
