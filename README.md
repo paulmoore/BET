@@ -46,6 +46,18 @@ BET.evaluate(['1','+','isqrt','(','2','^2',')'], function(error, result) {
 });
 ```
 
+There is also a synchronous method
+```CoffeeScript
+{evaluateSync} = require 'bet'
+try
+    val = evaluateSync [1, '+', 2]
+    console.log val
+    # throws an error
+    evaluateSync ['*', '+', 1, 'x']
+catch e
+    console.log e
+```
+
 You will want to check the source to see the full list of built-in operators and functions that are currently supported.
 
 ### Custom Operators
